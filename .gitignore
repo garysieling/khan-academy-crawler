@@ -1,3 +1,5 @@
 *.json
 *.swp
 node_modules/
+bin/
+data/

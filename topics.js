@@ -1,4 +1,5 @@
 const fs = require('fs');
+const _ = require('lodash');
 const data = JSON.parse(fs.readFileSync('topics.json'));
 
 // youtube_id, description, title, 
@@ -8,6 +9,7 @@ const data = JSON.parse(fs.readFileSync('topics.json'));
 //childrenx`.children[0].children
 
 const counts = {};
+const youtube = [];
 
 function processChildren(data, topics) {
   //console.log(data.length);
@@ -34,7 +36,8 @@ function processChildren(data, topics) {
         const key = nextTopics.slice(0, j).join('/');
 	counts[key] = (counts[key] || 0) + 1;
       }
-      console.log(row.youtube_id + ', ' + nextTopics.join(', '));
+      //console.log(row.youtube_id + ', ' + nextTopics.join(', '));
+      youtube.push(row.youtube_id);
     }
 
     if (row.children) {
@@ -46,3 +49,21 @@ function processChildren(data, topics) {
 processChildren(data.children, []);
 
 console.log(JSON.stringify(counts, null, 2));
+
+const dataDir = ".";
+const ffmpegDir = "/usr/local/bin/ffmpeg";
+
+fs.writeFileSync(
+  "youtube.sh",
+  _.uniq(youtube).map(
+    (id) => `./bin/youtube-dl \
+      --ffmpeg-location ${ffmpegDir} \
+      --skip-download \
+      --write-sub --write-auto-sub --sub-format vtt \
+      --ignore-errors --youtube-skip-dash-manifest \
+      -o '${dataDir}/data/%(id)s/%(id)s.%(ext)s' --write-info-json \
+      --no-call-home \
+      ${id}
+	`
+  ).join("\n")
+)
