@@ -65,7 +65,7 @@ fs.writeFileSync(
       --ignore-errors --youtube-skip-dash-manifest \
       -o '${dataDir}/data/%(id)s/%(id)s.%(ext)s' --write-info-json \
       --no-call-home \
-      ${id}
+      "${id}"
 	`
   ).join("\n")
 )
