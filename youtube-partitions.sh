@@ -1,0 +1,10 @@
+nohup ./youtube0.sh & 
+nohup ./youtube1.sh & 
+nohup ./youtube2.sh & 
+nohup ./youtube3.sh & 
+nohup ./youtube4.sh & 
+nohup ./youtube5.sh & 
+nohup ./youtube6.sh & 
+nohup ./youtube7.sh & 
+nohup ./youtube8.sh & 
+nohup ./youtube9.sh & 

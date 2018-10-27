@@ -52,20 +52,33 @@ console.log(JSON.stringify(counts, null, 2));
 
 const dataDir = ".";
 const ffmpegDir = "/usr/local/bin/ffmpeg";
+let partitions = 10;
+const videos = _.uniq(youtube);
 
-fs.writeFileSync(
-  "youtube.sh",
-  _.uniq(youtube).filter(
-    (id) => !fs.existsSync(`./${id}/${id}.en.vtt`)
-  ).map(
-    (id) => `./bin/youtube-dl \
+script = "";
+
+for (let i = 0; i < partitions; i++) {
+  let file = `youtube${i}.sh`;
+
+  fs.writeFileSync(
+    file,
+    videos.filter(
+      (id, idx) => !fs.existsSync(`./data/${id}/${id}.info.json`) &&
+	           idx % partitions === i
+    ).map(
+      (id) => `./bin/youtube-dl \
       --ffmpeg-location ${ffmpegDir} \
       --skip-download \
       --write-sub --write-auto-sub --sub-format vtt \
       --ignore-errors --youtube-skip-dash-manifest \
       -o '${dataDir}/data/%(id)s/%(id)s.%(ext)s' --write-info-json \
       --no-call-home \
-      "${id}"
+      "https://www.youtube.com/watch?v=${id}"
 	`
-  ).join("\n")
-)
+    ).join("\n")
+  )
+
+  script = script + "nohup ./" + file + " & \n";
+}
+
+fs.writeFileSync("youtube-partitions.sh", script);
