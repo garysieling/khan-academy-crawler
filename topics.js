@@ -62,6 +62,10 @@ for (let i = 0; i < partitions; i++) {
 
   fs.writeFileSync(
     file,
+    `pmset noidle &
+PMSETPID=$!
+
+` +
     videos.filter(
       (id, idx) => !fs.existsSync(`./data/${id}/${id}.info.json`) &&
 	           idx % partitions === i
@@ -75,7 +79,9 @@ for (let i = 0; i < partitions; i++) {
       --no-call-home \
       "https://www.youtube.com/watch?v=${id}"
 	`
-    ).join("\n")
+    ).join("\n") + `
+	  kill $PMSETPID
+	  `;
   )
 
   script = script + "nohup ./" + file + " & \n";
