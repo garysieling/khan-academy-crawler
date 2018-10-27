@@ -55,7 +55,9 @@ const ffmpegDir = "/usr/local/bin/ffmpeg";
 
 fs.writeFileSync(
   "youtube.sh",
-  _.uniq(youtube).map(
+  _.uniq(youtube).filter(
+    (id) => !fs.existsSync(`./${id}/${id}.en.vtt`)
+  ).map(
     (id) => `./bin/youtube-dl \
       --ffmpeg-location ${ffmpegDir} \
       --skip-download \
