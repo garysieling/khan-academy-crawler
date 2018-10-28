@@ -10,6 +10,7 @@ const data = JSON.parse(fs.readFileSync('topics.json'));
 
 const counts = {};
 const youtube = [];
+const topicMapping = {};
 
 function processChildren(data, topics) {
   //console.log(data.length);
@@ -37,6 +38,7 @@ function processChildren(data, topics) {
 	counts[key] = (counts[key] || 0) + 1;
       }
       //console.log(row.youtube_id + ', ' + nextTopics.join(', '));
+      topicMapping[row.youtube_id] = nextTopics;
       youtube.push(row.youtube_id);
     }
 
@@ -65,8 +67,7 @@ for (let i = 0; i < partitions; i++) {
     `pmset noidle &
 PMSETPID=$!
 
-` +
-    videos.filter(
+` + videos.filter(
       (id, idx) => !fs.existsSync(`./data/${id}/${id}.info.json`) &&
 	           idx % partitions === i
     ).map(
@@ -81,10 +82,29 @@ PMSETPID=$!
 	`
     ).join("\n") + `
 	  kill $PMSETPID
-	  `;
-  )
+	  `
+  );
 
   script = script + "nohup ./" + file + " & \n";
 }
 
 fs.writeFileSync("youtube-partitions.sh", script);
+
+const srt = require('srt-to-text');
+fs.readdirSync('data').filter(
+  (id) => fs.existsSync('data/' + id + '/' + id + '.en.vtt') 
+).map(
+  (id) => [id, fs.readFileSync('data/' + id + '/' + id + '.en.vtt', 'utf-8')]
+).map(
+  ([id, text]) => [
+	  id, 
+	  topicMapping[id].map(
+	  	(_, i) => topicMapping[id].slice(0, i + 1).join('__')
+	  ).map(
+		  (_) => "__label__" + _.replace(/[ ()-/\:.]/g, '_')
+	  ), 
+	  srt.parse(text)
+  ]
+).map(
+  console.log
+)
