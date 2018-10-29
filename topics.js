@@ -194,10 +194,10 @@ const tokenizer = new natural.WordTokenizer();
 const lines =
   fs.readdirSync('data').filter(
     (id) => fs.existsSync('data/' + id + '/' + id + '.en.vtt') 
-  ).map(
-    (id) => [id, fs.readFileSync('data/' + id + '/' + id + '.en.vtt', 'utf-8')]
   ).filter(
     (id) => !!topicMapping[id]
+  ).map(
+    (id) => [id, fs.readFileSync('data/' + id + '/' + id + '.en.vtt', 'utf-8')]
   ).map(
     ([id, text]) => [
         id, 
