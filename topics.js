@@ -222,5 +222,6 @@ const train = randomized.slice(indexToSplit + 1);
 
 fs.writeFileSync('test.txt', test.join("\n"));
 fs.writeFileSync('train.txt', train.join("\n"));
+fs.writeFileSync('all.txt', randomized.join("\n"));
 
 
