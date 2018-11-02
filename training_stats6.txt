@@ -1,0 +1,107 @@
+Arguments: 
+lr: 0.01
+dim: 50
+epoch: 5
+maxTrainTime: 8640000
+validationPatience: 10
+saveEveryEpoch: 0
+loss: hinge
+margin: 0.05
+similarity: dot
+maxNegSamples: 500
+negSearchLimit: 100
+thread: 20
+minCount: 1
+minCountLabel: 1
+label: __label__
+ngrams: 1
+bucket: 2000000
+adagrad: 0
+trainMode: 0
+fileFormat: fastText
+normalizeText: 0
+dropoutLHS: 0
+dropoutRHS: 0
+Start to initialize starspace model.
+Build dict from input file : /Users/garysieling/khan-academy/train.txt
+Loading data from file : /Users/garysieling/khan-academy/train.txt
+Total number of examples loaded : 5816
+Initialized model weights. Model size :
+matrix : 54887 50
+Training epoch 0: 0.01 0.002
+
+ ---+++                Epoch    0 Train error : 0.03864386 +++--- ☃
+Training epoch 1: 0.008 0.002
+
+ ---+++                Epoch    1 Train error : 0.02047222 +++--- ☃
+Training epoch 2: 0.006 0.002
+
+ ---+++                Epoch    2 Train error : 0.01423558 +++--- ☃
+Training epoch 3: 0.004 0.002
+
+ ---+++                Epoch    3 Train error : 0.00986865 +++--- ☃
+Training epoch 4: 0.002 0.002
+
+ ---+++                Epoch    4 Train error : 0.00696201 +++--- ☃
+Saving model to file : /Users/garysieling/khan-academy/model
+Saving model in tsv format : /Users/garysieling/khan-academy/model.tsv
+Start to evaluate trained model:
+Arguments: 
+lr: 0.01
+dim: 50
+epoch: 5
+maxTrainTime: 8640000
+validationPatience: 10
+saveEveryEpoch: 0
+loss: hinge
+margin: 0.05
+similarity: dot
+maxNegSamples: 10
+negSearchLimit: 50
+thread: 10
+minCount: 1
+minCountLabel: 1
+label: __label__
+ngrams: 1
+bucket: 2000000
+adagrad: 1
+trainMode: 0
+fileFormat: fastText
+normalizeText: 0
+dropoutLHS: 0
+dropoutRHS: 0
+Start to load a trained starspace model.
+STARSPACE-2017-2
+Initialized model weights. Model size :
+matrix : 54887 50
+Model loaded.
+Loading data from file : /Users/garysieling/khan-academy/test.txt
+Total number of examples loaded : 1938
+------Loaded model args:
+Arguments: 
+lr: 0.01
+dim: 50
+epoch: 5
+maxTrainTime: 8640000
+validationPatience: 10
+saveEveryEpoch: 0
+loss: hinge
+margin: 0.05
+similarity: dot
+maxNegSamples: 500
+negSearchLimit: 100
+thread: 10
+minCount: 1
+minCountLabel: 1
+label: __label__
+ngrams: 1
+bucket: 2000000
+adagrad: 1
+trainMode: 0
+fileFormat: fastText
+normalizeText: 0
+dropoutLHS: 0
+dropoutRHS: 0
+Predictions use 484 known labels.
+Evaluation Metrics : 
+hit@1: 0.155315 hit@10: 0.70743 hit@20: 0.843137 hit@50: 0.940144 mean ranks : 16.2219 Total examples : 1938
