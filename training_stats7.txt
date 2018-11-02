@@ -1,0 +1,122 @@
+Arguments: 
+lr: 0.01
+dim: 50
+epoch: 10
+maxTrainTime: 8640000
+validationPatience: 10
+saveEveryEpoch: 0
+loss: hinge
+margin: 0.05
+similarity: dot
+maxNegSamples: 500
+negSearchLimit: 100
+thread: 20
+minCount: 1
+minCountLabel: 1
+label: __label__
+ngrams: 1
+bucket: 2000000
+adagrad: 0
+trainMode: 0
+fileFormat: fastText
+normalizeText: 0
+dropoutLHS: 0
+dropoutRHS: 0
+Start to initialize starspace model.
+Build dict from input file : /Users/garysieling/khan-academy/train.txt
+Loading data from file : /Users/garysieling/khan-academy/train.txt
+Total number of examples loaded : 5816
+Initialized model weights. Model size :
+matrix : 54887 50
+Training epoch 0: 0.01 0.001
+
+ ---+++                Epoch    0 Train error : 0.04068115 +++--- ☃
+Training epoch 1: 0.009 0.001
+
+ ---+++                Epoch    1 Train error : 0.02897568 +++--- ☃
+Training epoch 2: 0.008 0.001
+
+ ---+++                Epoch    2 Train error : 0.02291540 +++--- ☃
+Training epoch 3: 0.007 0.001
+
+ ---+++                Epoch    3 Train error : 0.01992950 +++--- ☃
+Training epoch 4: 0.006 0.001
+
+ ---+++                Epoch    4 Train error : 0.01427768 +++--- ☃
+Training epoch 5: 0.005 0.001
+
+ ---+++                Epoch    5 Train error : 0.01062739 +++--- ☃
+Training epoch 6: 0.004 0.001
+
+ ---+++                Epoch    6 Train error : 0.00815344 +++--- ☃
+Training epoch 7: 0.003 0.001
+
+ ---+++                Epoch    7 Train error : 0.00691350 +++--- ☃
+Training epoch 8: 0.002 0.001
+
+ ---+++                Epoch    8 Train error : 0.00533159 +++--- ☃
+Training epoch 9: 0.000999999 0.001
+
+ ---+++                Epoch    9 Train error : 0.00475600 +++--- ☃
+Saving model to file : /Users/garysieling/khan-academy/model
+Saving model in tsv format : /Users/garysieling/khan-academy/model.tsv
+Start to evaluate trained model:
+Arguments: 
+lr: 0.01
+dim: 50
+epoch: 5
+maxTrainTime: 8640000
+validationPatience: 10
+saveEveryEpoch: 0
+loss: hinge
+margin: 0.05
+similarity: dot
+maxNegSamples: 10
+negSearchLimit: 50
+thread: 10
+minCount: 1
+minCountLabel: 1
+label: __label__
+ngrams: 1
+bucket: 2000000
+adagrad: 1
+trainMode: 0
+fileFormat: fastText
+normalizeText: 0
+dropoutLHS: 0
+dropoutRHS: 0
+Start to load a trained starspace model.
+STARSPACE-2017-2
+Initialized model weights. Model size :
+matrix : 54887 50
+Model loaded.
+Loading data from file : /Users/garysieling/khan-academy/test.txt
+Total number of examples loaded : 1938
+------Loaded model args:
+Arguments: 
+lr: 0.01
+dim: 50
+epoch: 10
+maxTrainTime: 8640000
+validationPatience: 10
+saveEveryEpoch: 0
+loss: hinge
+margin: 0.05
+similarity: dot
+maxNegSamples: 500
+negSearchLimit: 100
+thread: 10
+minCount: 1
+minCountLabel: 1
+label: __label__
+ngrams: 1
+bucket: 2000000
+adagrad: 1
+trainMode: 0
+fileFormat: fastText
+normalizeText: 0
+dropoutLHS: 0
+dropoutRHS: 0
+Predictions use 484 known labels.
+Evaluation Metrics : 
+hit@1: 0.191434 hit@10: 0.773478 hit@20: 0.890093 hit@50: 0.963364 mean ranks : 11.4458 Total examples : 1938
